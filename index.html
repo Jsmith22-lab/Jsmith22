@@ -4,252 +4,458 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>James Smith | Personal Website</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-alt: #f8fbff;
+      --text: #172033;
+      --muted: #5b667a;
+      --border: rgba(23, 32, 51, 0.1);
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --shadow-soft: 0 10px 24px rgba(15, 23, 42, 0.06);
+      --primary: #0f6fff;
+      --primary-dark: #0b57cc;
+      --header: #111827;
+      --header-soft: rgba(255, 255, 255, 0.08);
+      --max-width: 1120px;
+      --radius: 20px;
     }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.6;
-      background: #f8f9fa;
-      color: #333;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.65;
+      background: linear-gradient(180deg, #f6f9fc 0%, #eef3f9 100%);
+      color: var(--text);
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
     .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
     }
 
     header {
-      background: #1f1f1f;
+      background: rgba(17, 24, 39, 0.96);
       color: #fff;
-      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
 
-    header .container {
+    .header-inner {
+      min-height: 92px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 1.5rem;
+      padding: 1rem 0;
       flex-wrap: wrap;
     }
 
-    .profile-pic {
-      width: 75px;
-      height: 75px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid white;
-    }
-
-    .profile-wrap {
+    .brand {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 1rem;
+    }
+
+    .profile-pic {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+      transition: transform 0.25s ease;
+    }
+
+    .brand:hover .profile-pic { transform: scale(1.03); }
+
+    .brand-copy h1 {
+      font-size: 1.35rem;
+      line-height: 1.1;
+      margin-bottom: 0.2rem;
+    }
+
+    .brand-copy p {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.95rem;
     }
 
     nav ul {
-      display: flex;
-      gap: 20px;
       list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     nav a {
-      font-weight: 600;
       color: #fff;
-      transition: color 0.3s ease;
+      font-weight: 600;
+      font-size: 0.96rem;
+      padding: 0.78rem 1rem;
+      border-radius: 999px;
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     nav a:hover {
-      color: #4fc3f7;
+      background: var(--header-soft);
+      color: #8dd0ff;
+      transform: translateY(-1px);
+    }
+
+    nav a.active {
+      background: #ffffff;
+      color: var(--header);
+      box-shadow: 0 8px 18px rgba(255, 255, 255, 0.12);
+    }
+
+    nav a.resume-link {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    nav a.resume-link:hover {
+      background: var(--primary-dark);
+      color: #fff;
     }
 
     .hero {
-      background: linear-gradient(to right, #007acc, #00c6ff);
-      color: white;
+      padding: 5.5rem 0 4.5rem;
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, rgba(15, 111, 255, 0.95), rgba(45, 181, 255, 0.9));
+      color: #fff;
+      border-radius: 28px;
+      padding: 4rem 3rem;
+      box-shadow: 0 28px 60px rgba(15, 111, 255, 0.22);
       text-align: center;
-      padding: 80px 20px;
-      animation: fadeIn 1s ease-in;
+      animation: fadeUp 0.8s ease;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.45rem 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     .hero h2 {
-      font-size: 2.8rem;
-      margin-bottom: 10px;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
     }
 
     .hero p {
-      font-size: 1.2rem;
+      font-size: 1.12rem;
+      max-width: 760px;
+      margin: 0 auto 1.8rem;
+      color: rgba(255, 255, 255, 0.94);
     }
 
-    section {
-      padding: 60px 20px;
-      animation: fadeIn 1s ease-in;
-    }
-
-    section h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #007acc;
-    }
-
-    .project-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-    }
-
-    .project-list li {
-      list-style: none;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-      transition: transform 0.3s ease;
-    }
-
-    .project-list li:hover {
-      transform: translateY(-5px);
-    }
-
-    .contact-info p {
-      margin-bottom: 10px;
-    }
-
-    .contact-info a {
-      color: #007acc;
-    }
-
-    footer {
-      background: #1f1f1f;
-      color: #ccc;
-      text-align: center;
-      padding: 20px 0;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
     .btn {
-      display: inline-block;
-      margin-top: 10px;
-      background: #007acc;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.95rem 1.35rem;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
     }
 
     .btn:hover {
-      background: #005f99;
+      transform: translateY(-2px);
+      box-shadow: 0 16px 24px rgba(15, 23, 42, 0.15);
     }
 
-    @media (max-width: 600px) {
-      header .container {
-        flex-direction: column;
-        text-align: center;
+    .btn-light {
+      background: #fff;
+      color: var(--primary-dark);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    main section {
+      padding: 2rem 0 5rem;
+      animation: fadeUp 0.8s ease;
+    }
+
+    .section-title {
+      margin-bottom: 1.4rem;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.9rem, 4vw, 2.5rem);
+      margin-bottom: 0.35rem;
+      color: var(--text);
+    }
+
+    .section-title p {
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+    }
+
+    .about-copy p + p { margin-top: 1rem; }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      padding: 1.5rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 34px rgba(15, 23, 42, 0.1);
+    }
+
+    .project-card h3 {
+      font-size: 1.1rem;
+      margin: 0.8rem 0 0.6rem;
+    }
+
+    .project-icon {
+      font-size: 1.7rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .contact-item {
+      background: var(--surface-alt);
+      border: 1px solid rgba(15, 111, 255, 0.12);
+      border-radius: 18px;
+      padding: 1.1rem 1.15rem;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-4px);
+      border-color: rgba(15, 111, 255, 0.35);
+    }
+
+    .contact-label {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+      font-weight: 700;
+    }
+
+    .contact-item a {
+      color: var(--primary-dark);
+      word-break: break-word;
+    }
+
+    footer {
+      background: #111827;
+      color: rgba(255, 255, 255, 0.76);
+      padding: 1.6rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    footer p + p {
+      margin-top: 0.2rem;
+      font-size: 0.95rem;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .header-inner {
+        justify-content: center;
       }
 
       nav ul {
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 10px;
-      }
-
-      .hero h2 {
-        font-size: 2rem;
-      }
-
-      .profile-wrap {
-        flex-direction: column;
         justify-content: center;
       }
+    }
+
+    @media (max-width: 640px) {
+      .hero-card,
+      .card { padding: 1.5rem; }
+      .hero { padding: 4rem 0 3rem; }
+      .profile-pic {
+        width: 62px;
+        height: 62px;
+      }
+      .brand {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+      .brand-copy h1 { font-size: 1.2rem; }
+      nav ul { gap: 0.4rem; }
+      nav a { padding: 0.72rem 0.9rem; }
     }
   </style>
 </head>
 <body>
-
   <header>
-    <div class="container">
-      <div class="profile-wrap">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
         <img src="2022 Jamie Smith Head Shot.jpg" alt="James Smith" class="profile-pic" />
-        <h1>James Smith</h1>
-      </div>
+        <div class="brand-copy">
+          <h1>James Smith</h1>
+          <p>Incoming Tax Associate at PwC</p>
+        </div>
+      </a>
       <nav>
         <ul>
-          <li><a href="index.html">Home</a></li>
+          <li><a class="active" href="index.html">Home</a></li>
           <li><a href="experience.html">Experience</a></li>
           <li><a href="Skills.html">Skills</a></li>
           <li><a href="Life.html">Life</a></li>
+          <li><a class="resume-link" href="James_Smith_2026_Resume.pdf" target="_blank">Resume</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
-      <h2>Hi, I'm James.</h2>
-      <p>Accounting Graduate | Incoming Tax Associate at PwC | Former Varsity Football Athlete</p>
-      <a class="btn" href="#contact">Get In Touch</a>
-    </div>
-  </section>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <span class="eyebrow">Washington &amp; Jefferson College</span>
+          <h2>Accounting graduate with a foundation in tax, analytics, and leadership.</h2>
+          <p>I am graduating from Washington &amp; Jefferson College with a bachelor&apos;s degree in Accounting and a minor in Computer Information Systems. After completing three internships with PwC, I am joining the firm as an incoming Tax Associate in Private Tax in the Pittsburgh office.</p>
+          <div class="hero-actions">
+            <a class="btn btn-light" href="#contact">Get In Touch</a>
+            <a class="btn btn-outline" href="James_Smith_2026_Resume.pdf" target="_blank">View Resume</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section id="about">
-    <div class="container">
-      <h2>About Me</h2>
-      <p>I am graduating from Washington &amp; Jefferson College with a Bachelor&apos;s degree in Accounting and a minor in Computer Information Systems. During my time at W&amp;J, I competed as a varsity football player, an experience that strengthened my leadership, discipline, and ability to perform in fast-paced team environments. I am an incoming Tax Associate with PwC in the Pittsburgh office, where I will be joining the Private Tax practice after completing three internships with the firm.</p>
-      <p>My background combines accounting, analytics, and technology. Through internships, coursework, and independent projects, I have built experience with tax return preparation, financial data analysis, workflow automation, and tools such as Excel, Python, SQL, Alteryx, and Power Automate. I enjoy finding practical ways to use technology to improve decision-making and streamline complex work.</p>
-      <p>Outside of work and academics, I enjoy traveling, skiing, golfing, fitness, and spending time with friends and family.</p>
-      <a class="btn" href="James_Smith_2026_Resume.pdf" download>Download Resume</a>
-    </div>
-  </section>
+    <section id="about">
+      <div class="container">
+        <div class="section-title">
+          <h2>About Me</h2>
+          <p>A snapshot of my academic background, professional direction, and the mindset I bring to every opportunity.</p>
+        </div>
+        <div class="card about-copy">
+          <p>I am graduating from Washington &amp; Jefferson College with a bachelor&apos;s degree in Accounting and a minor in Computer Information Systems. During my time at W&amp;J, I played varsity football, an experience that strengthened my discipline, teamwork, resilience, and ability to perform in high-pressure environments.</p>
+          <p>I am an incoming Tax Associate with PwC in the Pittsburgh office, where I will be joining the Private Tax practice after completing three internships with the firm. Across those experiences, I built exposure to individual and fiduciary tax work, client service, tax technology, and process improvement.</p>
+          <p>My background combines accounting, analytics, and technology. Through internships, coursework, and independent projects, I have developed skills in Excel, Python, SQL, Alteryx, and automation tools, with a focus on using data and technology to improve workflows and support better decisions.</p>
+        </div>
+      </div>
+    </section>
 
-  <section id="projects">
-    <div class="container">
-      <h2>Projects</h2>
-      <ul class="project-list">
-        <li>
-          📈 <strong>Options Trading Bot</strong><br />
-          Built in Python, this project scans the S&amp;P 500 for bullish and bearish options setups and sends trade recommendations through automated alerts.
-        </li>
-        <li>
-          🏀 <strong>NBA Player Performance Prediction</strong><br />
-          Used regression models and data analysis techniques to evaluate player statistics and predict minutes played based on key performance indicators.
-        </li>
-        <li>
-          🐍 <strong>Python Data Wrangling Tutorial</strong><br />
-          Created a practical tutorial focused on cleaning, filtering, organizing, and interpreting datasets with Python for analytical use cases.
-        </li>
-      </ul>
-    </div>
-  </section>
+    <section id="projects">
+      <div class="container">
+        <div class="section-title">
+          <h2>Featured Projects</h2>
+          <p>A few projects that reflect my interest in data, automation, modeling, and problem solving.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-icon">📈</div>
+            <h3>Options Trading Bot</h3>
+            <p>Built in Python, this project scans the S&amp;P 500 for bullish and bearish options setups and sends automated trade alerts based on defined rules.</p>
+          </article>
+          <article class="project-card">
+            <div class="project-icon">🏀</div>
+            <h3>NBA Player Performance Prediction</h3>
+            <p>Used regression models and statistical analysis to evaluate player performance metrics and predict minutes played using key indicators.</p>
+          </article>
+          <article class="project-card">
+            <div class="project-icon">🐍</div>
+            <h3>Python Data Wrangling Tutorial</h3>
+            <p>Created a hands-on tutorial focused on cleaning, filtering, organizing, and interpreting data with Python for practical analytics use cases.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  <section id="contact">
-    <div class="container contact-info">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:jamie22usc@gmail.com">jamie22usc@gmail.com</a></p>
-      <p>Phone: <a href="tel:+14125229557">(412) 522-9557</a></p>
-      <p>GitHub: <a href="https://github.com/jamie22usc" target="_blank">github.com/jamie22usc</a></p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/james-smith22" target="_blank">linkedin.com/in/james-smith22</a></p>
-    </div>
-  </section>
+    <section id="contact">
+      <div class="container">
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>Feel free to reach out for professional opportunities, networking, or collaboration.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-item">
+            <span class="contact-label">Email</span>
+            <a href="mailto:jamie22usc@gmail.com">jamie22usc@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Phone</span>
+            <a href="tel:+14125229557">(412) 522-9557</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">GitHub</span>
+            <a href="https://github.com/jamie22usc" target="_blank">github.com/jamie22usc</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">LinkedIn</span>
+            <a href="https://linkedin.com/in/james-smith22" target="_blank">linkedin.com/in/james-smith22</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <div class="container">
       <p>&copy; 2026 James Smith. All rights reserved.</p>
+      <p>Incoming Tax Associate, Private Tax | PwC Pittsburgh</p>
     </div>
   </footer>
-
 </body>
 </html>
